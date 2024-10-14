@@ -1,0 +1,25 @@
+{
+  "payload": {
+    "headers": [
+      {
+        "name": "From",
+        "value": "omkar@gmail.com"
+      },
+      {
+        "name": "Subject",
+        "value": "Test mail from Omkar"
+      },
+      {
+        "name": "Date",
+        "value": "Sat, 12 Oct 2024 17:08:37 +0000"
+      }
+    ],
+    "body": {
+      "data": "VGVzdCBNYWlsIFJlY2VpdmVkIGZyb20gT21rYXI="
+    }
+  },
+  "labelIds": [
+      "UNREAD",
+      "INBOX"
+  ]
+}

@@ -1,0 +1,11 @@
+.chalice/deployments/
+.chalice/deployed/
+.chalice/venv/
+venv/
+
+env
+**/__pycache__/**
+.idea/**
+.DS_Store
+.coverage
+coverage.xml

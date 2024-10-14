@@ -1,0 +1,29 @@
+{
+    "predicate": "any",
+    "rules": [
+        {
+            "field": "From",
+            "predicate": "contains",
+            "value": "omkar"
+        },
+        {
+            "field": "Subject",
+            "predicate": "contains",
+            "value": "Facebook"
+        },
+        {
+            "field": "Date Received",
+            "predicate": "greater_than",
+            "value": 10
+        }
+    ],
+    "actions": [
+        {
+            "action_type": "MARK_AS_READ"
+        },
+        {
+            "action_type": "MOVE_MESSAGE",
+            "folder_name": "Important"
+        }
+    ]
+}

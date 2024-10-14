@@ -1,0 +1,6 @@
+chalice==1.31.2
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+mysql-connector-python

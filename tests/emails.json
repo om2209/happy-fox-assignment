@@ -1,0 +1,31 @@
+{
+  "emails": [
+    {
+      "id": 1,
+      "from": "omkar@gmail.com",
+      "subject": "Test email",
+      "message": "Test email from Omkar",
+      "receivedDate": "Sat, 12 Oct 2024 17:08:37 +0000",
+      "labels": "INBOX",
+      "isRead": false
+    },
+    {
+      "id": 2,
+      "from": "test@gmail.com",
+      "subject": "Testing ",
+      "message": "Test email from XYZ",
+      "receivedDate": "Sat, 12 Oct 2024 14:08:37 +0000",
+      "labels": "INBOX",
+      "isRead": true
+    },
+    {
+      "id": 3,
+      "from": "happyfox@outlook.com",
+      "subject": "HappyFox Outlook",
+      "message": "Test email from HappyFox",
+      "receivedDate": "Sat, 12 Oct 2024 15:18:29 +0000",
+      "labels": "INBOX",
+      "isRead": false
+    }
+  ]
+}
