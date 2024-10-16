@@ -27,7 +27,5 @@ This project has below two scripts
         )`
   6. Add the name of the database, user and password details of the database in `helpers/constants.py` file in `DB_NAME`, `DB_USER`, `DB_PASSWORD` respectively.
   7. Test cases for filtering emails might fail if you have different details in your DB, please adjust the message and count of emails accordingly in `tests/TestGmailService.py` file.
-  8. Use below command to run the app: `chalice local --no-autoreload --port=8085`, please use port of your choice.
+  8. Use main methods in the script files to run the scripts.
   9. This app by default will fetch 10 emails, if you want to pull more, change the value of `MAX_RESULTS` in `helpers/constants.py` file to your choice.
-  10. Two sample request bodies for POST API is available in `tests/email_filters_positive.json` and `tests/email_filters_negative.json` files.
-  11. Please use `Control + C` to stop the app.
