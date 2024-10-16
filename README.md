@@ -2,9 +2,9 @@
 
 ## Description
 
-This project has below two APIs 
-  1. To download emails from Google's Gmail API and saving that to MySQL database. (`GET /emails`)
-  2. Update the emails in the DB using the filters and a list of actions provided by the user (`POST /emails`)
+This project has below two scripts 
+  1. To download emails from Google's Gmail API and saving that to MySQL database. (`scripts/save_emails.py`)
+  2. Update the emails in the DB using the filters and a list of actions provided by the user in a file called `rules.json` (`scripts/filter_emails.py`)
 
 ## Installation
 
@@ -26,7 +26,7 @@ This project has below two APIs
             is_read BOOL
         )`
   6. Add the name of the database, user and password details of the database in `helpers/constants.py` file in `DB_NAME`, `DB_USER`, `DB_PASSWORD` respectively.
-  7. Test cases for filtering emails might fail if you have different detaills in your DB, please adjust the message and count of emails accordingly in `tests/TestGmailService.py` file.
+  7. Test cases for filtering emails might fail if you have different details in your DB, please adjust the message and count of emails accordingly in `tests/TestGmailService.py` file.
   8. Use below command to run the app: `chalice local --no-autoreload --port=8085`, please use port of your choice.
   9. This app by default will fetch 10 emails, if you want to pull more, change the value of `MAX_RESULTS` in `helpers/constants.py` file to your choice.
   10. Two sample request bodies for POST API is available in `tests/email_filters_positive.json` and `tests/email_filters_negative.json` files.

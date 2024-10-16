@@ -1,8 +1,7 @@
 import base64
+import re
 from datetime import datetime
 from typing import List
-
-from chalice import Response
 
 from data.Action import Action
 from data.Email import Email
@@ -29,9 +28,7 @@ class GmailService:
                 saved_emails += 1
         EmailRepository().destroy_connection()
 
-        return Response(body={'message': f'{len(messages)} emails received and {saved_emails} emails to DB'},
-                        status_code=200,
-                        headers={'Content-Type': 'application/json'})
+        return saved_emails
 
     def get_email_details(self, headers, message_details):
         sender = next(header['value'] for header in headers if header['name'] == 'From')
@@ -76,7 +73,9 @@ class GmailService:
 
         field_value = getattr(email, FILTER_FIELD_TO_DATA_FIELD_MAPPING[FieldType(rule.field).value.upper()])
         if FieldType(rule.field).value.upper() == 'DATE RECEIVED':
-            field_value = datetime.strptime(field_value.strip(), "%a, %d %b %Y %H:%M:%S %z").replace(tzinfo=None)
+            field_value = (field_value.split(',')[-1]).split('+')[0]
+            field_value = field_value.split('-')[0]
+            field_value = datetime.strptime(field_value.strip(), "%d %b %Y %H:%M:%S").replace(tzinfo=None)
 
         if rule.predicate in [string_predicate.value for string_predicate in StringPredicate]:
             return self.apply_string_predicates(rule, field_value)
@@ -86,6 +85,11 @@ class GmailService:
             return self.apply_date_predicates(rule, field_value)
 
         return False
+
+    @staticmethod
+    def has_timezone(time_string):
+        timezone_pattern = r'[+-]\d{4}$'
+        return bool(re.search(timezone_pattern, time_string))
 
     @staticmethod
     def apply_string_predicates(rule, field_value):
@@ -113,7 +117,4 @@ class GmailService:
             if EmailRepository().update_email(email, actions):
                 rows_affected += 1
 
-        return Response(body={'message': f'Out of {len(emails)} filtered emails, '
-                                         f'all actions performed on {rows_affected} emails without errors'},
-                        status_code=200,
-                        headers={'Content-Type': 'application/json'})
+        return rows_affected

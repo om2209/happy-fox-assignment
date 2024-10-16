@@ -21,8 +21,7 @@ class TestGmailService(TestCase):
 
         response = GmailService().save_emails(service, messages)
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('2 emails received and 2 emails to DB', response.body['message'])
+        self.assertEqual(response, 2)
         mock_email_repository.return_value.save_email.assert_called()
         self.assertEqual(mock_email_repository.return_value.save_email.call_count, 2)
 
@@ -38,8 +37,7 @@ class TestGmailService(TestCase):
 
         response = GmailService().save_emails(service, messages)
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('1 emails received and 0 emails to DB', response.body['message'])
+        self.assertEqual(response, 0)
         mock_email_repository.return_value.save_email.assert_called()
         self.assertNotEqual(mock_email_repository.return_value.save_email.call_count, 2)
         self.assertEqual(mock_email_repository.return_value.save_email.call_count, 1)
@@ -52,11 +50,9 @@ class TestGmailService(TestCase):
 
         response = GmailService().perform_actions_on_rules(RuleSet(**email_filters))
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('Out of 1 filtered emails, all actions performed on 1 emails without errors',
-                      response.body['message'])
+        self.assertEqual(response, 3)
         mock_email_repository.return_value.update_email.assert_called()
-        self.assertEqual(mock_email_repository.return_value.update_email.call_count, 1)
+        self.assertEqual(mock_email_repository.return_value.update_email.call_count, 3)
 
     @mock.patch('services.GmailService.EmailRepository')
     def test_perform_actions_on_rules_failure(self, mock_email_repository):
@@ -66,9 +62,7 @@ class TestGmailService(TestCase):
 
         response = GmailService().perform_actions_on_rules(RuleSet(**email_filters))
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('Out of 2 filtered emails, all actions performed on 0 emails without errors',
-                      response.body['message'])
+        self.assertEqual(response, 0)
         mock_email_repository.return_value.update_email.assert_called()
         self.assertEqual(mock_email_repository.return_value.update_email.call_count, 2)
 

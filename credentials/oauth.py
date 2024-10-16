@@ -6,7 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-CREDENTIALS_DIRECTORY = 'credentials'
+CREDENTIALS_DIRECTORY = '/'.join(os.getcwd().split('/')[0:-1]) + '/credentials'
 
 
 class GmailAuthentication:
